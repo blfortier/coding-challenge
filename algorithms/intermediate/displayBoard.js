@@ -1,13 +1,67 @@
 
 let vertical = "--"  + "+" + "--"  + "-" + "+" + "--";
 
-let position = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const position = ["", "", "", "", "", "", "", "", ""];
 
-for(let i = 0; i < 9; i++) {
-    position[i] = " ";
+let player_1_moves = [];
+let player_2_moves = [];
+
+const winningPositions = [
+	[0,1,2],
+	[3,4,5],
+	[6,7,8],
+	[0,4,8],
+	[2,4,6],
+	[0,3,6],
+	[1,4,7],
+	[2,5,8]
+];
+
+
+function wins(player1) {
+    
+    const finalResults = [];
+    
+    player1.forEach((arr1) => winningPositions.forEach((arr2) =>
+        {if(arr1 == arr2) {
+            finalResults.push(arr1)
+        }
+      }
+    ));
+    
+    console.log("FR " + finalResults);
+ 
+    
+    
+    
+   /* 
+    if (boardMoves[0] == boardMoves[1] && boardMoves[1] == boardMoves[2]) {
+        console.log("Winner!");
+    } else if (boardMoves[3] == boardMoves[4] && boardMoves[4] == boardMoves[5]) {
+        console.log("Winner!");
+    } else if (boardMoves[6] == boardMoves[7] && boardMoves[7] == boardMoves[8]) {
+        console.log("Winner!");
+    } else if (boardMoves[0] == boardMoves[4] && boardMoves[4] == boardMoves[8]) {
+        console.log("Winner!");
+    } else if (boardMoves[2] == boardMoves[4] && boardMoves[4] == boardMoves[6]) {
+        console.log("Winner!");
+    } else if (boardMoves[0] == boardMoves[3] && boardMoves[3] == boardMoves[6]) {
+        console.log("Winner!");
+    } else if (boardMoves[1] == boardMoves[4] && boardMoves[4] == boardMoves[7]) {
+        console.log("Winner!");
+    } else if (boardMoves[2] == boardMoves[5] && boardMoves[5] == boardMoves[8]) {
+        console.log("Winner!");
+    } else
+        console.log("OK");*/
+    
 }
 
 
+/*for(let i = 0; i < 9; i++) {
+    position[i] = "";
+}*/
+
+/*
 const readline = require('readline');
 
 
@@ -17,7 +71,7 @@ const rl = readline.createInterface({
 });
 
 
-/*rl.question('Player one, would you like to be X\'s or O\'s? ', (answer) => {
+rl.question('Player one, would you like to be X\'s or O\'s? ', (answer) => {
       console.log(`You said: ${answer}`);
       player_1 = answer;
 
@@ -26,72 +80,80 @@ const rl = readline.createInterface({
 
 */
 
-function placeOnBoard(placement, player) {
+function isValidMove(move) {
+    let result;
     
-   let mark = (player == 1) ? 'X' : 'O';
-   
-   switch(placement) {
+   switch(move) {
         case 0:
-           if(position[0] == " ") {
-               position[0] = mark;
-           }
+           result = (position[0] == "") ? true : false;
+           console.log(result);
            break;
         case 1:
-            if(position[1] == " ") {
-               position[1] = mark;
-           }
-           break;
+            result = (position[1] == "") ? true : false;
+            console.log(result);
+            break;
         case 2:
-            if(position[2] == " ") {
-               position[2] = mark;
-           }
+           result = (position[2] == "") ? true : false;
+           console.log(result);
            break;
         case 3:
-            if(position[3] == " ") {
-               position[3] = mark;
-           }
+            result = (position[3] == "") ? true : false;
+           console.log(result);
            break;
         case 4:
-            if(position[4] == " ") {
-               position[4] = mark;
-           }
+            result = (position[4] == "") ? true : false;
+           console.log(result);
            break;
         case 5:
-            if(position[5] == " ") {
-               position[5] = mark;
-           }
-           break;
+            result = (position[5] == "") ? true : false;
+            console.log(result);
+            break;
         case 6:
-            if(position[6] == " ") {
-               position[6] = mark;
-           }
-           break;
+            result = (position[6] == "") ? true : false;
+            console.log(result);
+            break;
         case 7:
-            if(position[7] == " ") {
-               position[7] = mark;
-           }
+           result = (position[7] == "") ? true : false;
+           console.log(result);
            break;
         case 8:
-            if(position[8] == " ") {
-               position[8] = mark;
-           }
-           break;
+            result = (position[8] == "") ? true : false;
+            console.log(result);
+            break;
    }
    
-   
-   
-   
+   return result;
 }
 
 
 
-function display() {
+function importBoard(string) {
+
+    for(let i =0; i < position.length; i++) {
+       position[i] = string[i];
+       
+       if (string[i] == "X" || string[i] == "x") {
+           player_1_moves.push(i);
+       } else if (string[i] == "O" || string[i] == "o") {
+           player_2_moves.push(i);
+       }
+    }
+    
+    console.log("String of pos: " + position);
+    console.log("Player 1 moves: " + player_1_moves);
+    console.log("Player 2 moves: " + player_2_moves);
+    
+}
+
+
+function displayBoard() {
     
     let row_1 = position[0] + " | " + position[1] + " | " + position[2];
     let row_2 = position[3] + " | " + position[4] + " | " + position[5];
     let row_3 = position[6] + " | " + position[7] + " | " + position[8];
 
     for (let i = 1; i < 2; i++) {
+     
         console.log(row_1);
         console.log(vertical);
         console.log(row_2);
@@ -102,29 +164,16 @@ function display() {
 }
 
 
-/*function make_move(spot) {
-    let player_1 = "X";
-    let player_2 = "O";
-    
-    
-    position[spot] = player_1;
-    
-    //console.log("pos " + position[4]);
-    
-}   */
-    placeOnBoard(1, 1);
-    placeOnBoard(3, 2);
-    placeOnBoard(5, 1);
-    placeOnBoard(2, 2);
-    placeOnBoard(1, 1);
-    placeOnBoard(8, 2);
-    placeOnBoard(0, 1);
-    placeOnBoard(7, 2);
+    let boardPlaces = ["X", "O", "X", "X", "X", "O", "O", "O", "X"];
+    importBoard(boardPlaces);
+   
+    let move = isValidMove(1);
 
+    displayBoard();
     
-    display();
+    wins(player_1_moves);
+    wins(player_2_moves);
     
-   /* placeOnBoard(3, player_1);
-    display();
-   */
+    console.log(winningPositions[1]);
     
+   
