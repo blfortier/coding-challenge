@@ -22,12 +22,20 @@ function wins(player1) {
     
     const finalResults = [];
     
-    player1.forEach((arr1) => winningPositions.forEach((arr2) =>
-        {if(arr1 == arr2) {
-            finalResults.push(arr1)
-        }
-      }
-    ));
+    for (let i = 0; i < winningPositions.length; i++) {
+        
+    }
+    
+
+    
+  
+
+
+    
+    
+    /* for (let j = 0; j < winningPositions[i].length; j++) {
+            console.log(winningPositions[i][j]); 
+        }  */
     
     console.log("FR " + finalResults);
  
@@ -80,58 +88,42 @@ rl.question('Player one, would you like to be X\'s or O\'s? ', (answer) => {
 
 */
 
+// This function checks whether a players move
+// is valid. Accepts an int, where the player
+// would like to put their token
 function isValidMove(move) {
+        
+    // Store true or false
     let result;
     
-   switch(move) {
-        case 0:
-           result = (position[0] == "") ? true : false;
-           console.log(result);
-           break;
-        case 1:
-            result = (position[1] == "") ? true : false;
-            console.log(result);
-            break;
-        case 2:
-           result = (position[2] == "") ? true : false;
-           console.log(result);
-           break;
-        case 3:
-            result = (position[3] == "") ? true : false;
-           console.log(result);
-           break;
-        case 4:
-            result = (position[4] == "") ? true : false;
-           console.log(result);
-           break;
-        case 5:
-            result = (position[5] == "") ? true : false;
-            console.log(result);
-            break;
-        case 6:
-            result = (position[6] == "") ? true : false;
-            console.log(result);
-            break;
-        case 7:
-           result = (position[7] == "") ? true : false;
-           console.log(result);
-           break;
-        case 8:
-            result = (position[8] == "") ? true : false;
-            console.log(result);
-            break;
-   }
+    // If the passed in number is beween 0 and 8 (the tic tac toe board),
+    // and the spot is empty, return true. If the spot is taken, return false
+    if (move >= 0 && move <= 8) {
+        result = (position[move] == "") ? true : false;
+    } else {
+        console.log("Please enter a number between 0 and 8");
+        result = false;
+    }
+  
+    console.log(result);
    
-   return result;
+    // Return the result, true or falsess
+    return result;
 }
 
 
-
+// This function takes a string of X's, O's, or ""
+// it stores the tokens in the appropriate place
+// on the tic tac toe board
 function importBoard(string) {
 
+    // Store the values of the passed array
+    // into the positions array
     for(let i =0; i < position.length; i++) {
        position[i] = string[i];
        
+       // Keep track of the player's move
+       // Store them in an array
        if (string[i] == "X" || string[i] == "x") {
            player_1_moves.push(i);
        } else if (string[i] == "O" || string[i] == "o") {
@@ -140,14 +132,15 @@ function importBoard(string) {
     }
     
     console.log("String of pos: " + position);
-    console.log("Player 1 moves: " + player_1_moves);
-    console.log("Player 2 moves: " + player_2_moves);
+    console.log("Player 1 moves: " + "[" + player_1_moves + "]");
+    console.log("Player 2 moves: " + "[" + player_2_moves + "]");
     
 }
 
 
 function displayBoard() {
     
+    // Display the tic tac toe board
     let row_1 = position[0] + " | " + position[1] + " | " + position[2];
     let row_2 = position[3] + " | " + position[4] + " | " + position[5];
     let row_3 = position[6] + " | " + position[7] + " | " + position[8];
@@ -164,10 +157,11 @@ function displayBoard() {
 }
 
 
-    let boardPlaces = ["X", "O", "X", "X", "X", "O", "O", "O", "X"];
+    let boardPlaces = ["X", "O", "O", "X", "X", "O", "O", "O", "X"];
     importBoard(boardPlaces);
    
-    let move = isValidMove(1);
+   
+    let move = isValidMove(2);
 
     displayBoard();
     
