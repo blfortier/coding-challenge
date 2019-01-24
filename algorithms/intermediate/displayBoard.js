@@ -19,25 +19,16 @@ const winningPositions = [
 
 
 function wins(player1) {
-    
+
     const finalResults = [];
     
-    for (let i = 0; i < winningPositions.length; i++) {
-        
-    }
-    
-
-    
-  
-
-
     
     
     /* for (let j = 0; j < winningPositions[i].length; j++) {
             console.log(winningPositions[i][j]); 
         }  */
     
-    console.log("FR " + finalResults);
+    //console.log("FR " + finalResults);
  
     
     
@@ -112,6 +103,19 @@ function isValidMove(move) {
 }
 
 
+function isGameOver() {
+    
+    if ((player_1_moves.length + player_2_moves.length) >= 9) {
+        console.log("Game is over");
+        return false;   
+    } else {
+        console.log("There's some moves left!");
+        return true;
+    }
+}
+
+
+
 // This function takes a string of X's, O's, or ""
 // it stores the tokens in the appropriate place
 // on the tic tac toe board
@@ -119,7 +123,7 @@ function importBoard(string) {
 
     // Store the values of the passed array
     // into the positions array
-    for(let i =0; i < position.length; i++) {
+    for(let i = 0; i < position.length; i++) {
        position[i] = string[i];
        
        // Keep track of the player's move
@@ -141,13 +145,16 @@ function importBoard(string) {
 function displayBoard() {
     
     // Display the tic tac toe board
+   // let preRow1 = "  |   |  ";
     let row_1 = position[0] + " | " + position[1] + " | " + position[2];
     let row_2 = position[3] + " | " + position[4] + " | " + position[5];
     let row_3 = position[6] + " | " + position[7] + " | " + position[8];
 
     for (let i = 1; i < 2; i++) {
-     
+        
+    //    console.log(preRow1);
         console.log(row_1);
+    //    console.log(preRow1);
         console.log(vertical);
         console.log(row_2);
         console.log(vertical);
@@ -157,17 +164,19 @@ function displayBoard() {
 }
 
 
-    let boardPlaces = ["X", "O", "O", "X", "X", "O", "O", "O", "X"];
+    let boardPlaces = ["O", "X", "O", "X", "X", "O", "", "O", "X"];
     importBoard(boardPlaces);
-   
+    
    
     let move = isValidMove(2);
 
     displayBoard();
     
     wins(player_1_moves);
-    wins(player_2_moves);
+   // wins(player_2_moves);
     
-    console.log(winningPositions[1]);
+    
+   isGameOver(); 
+    
     
    
