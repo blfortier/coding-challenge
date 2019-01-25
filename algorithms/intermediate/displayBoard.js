@@ -1,5 +1,5 @@
 
-let vertical = "--"  + "+" + "--"  + "-" + "+" + "--";
+let vertical = "---" + "+" + "---"  + "-" + "+" + "---";
 
 const position = ["", "", "", "", "", "", "", "", ""];
 
@@ -18,9 +18,10 @@ const winningPositions = [
 ];
 
 
-function wins(player1) {
+function wins(playerMoves) {
 
     const finalResults = [];
+    
     
     
     
@@ -112,8 +113,18 @@ function isGameOver() {
         console.log("There's some moves left!");
         return true;
     }
+ /*   
+    for (let i = 0; i < boardPlaces.length; i++){
+        if (boardPlaces[i] != "X" || boardPlaces[i] != "O") {
+            console.log("There are moves left!");
+            return false; 
+        } else {
+            console.log("Game is over");
+            return false; 
+        }*/
+           
+    
 }
-
 
 
 // This function takes a string of X's, O's, or ""
@@ -135,7 +146,7 @@ function importBoard(string) {
        }
     }
     
-    console.log("String of pos: " + position);
+    console.log("String of pos: " + "[" + position + "]");
     console.log("Player 1 moves: " + "[" + player_1_moves + "]");
     console.log("Player 2 moves: " + "[" + player_2_moves + "]");
     
@@ -145,26 +156,29 @@ function importBoard(string) {
 function displayBoard() {
     
     // Display the tic tac toe board
-   // let preRow1 = "  |   |  ";
-    let row_1 = position[0] + " | " + position[1] + " | " + position[2];
-    let row_2 = position[3] + " | " + position[4] + " | " + position[5];
-    let row_3 = position[6] + " | " + position[7] + " | " + position[8];
+    let preRow1 = "   |    |  ";
+    let row_1 = position[0] + "  | " + position[1] + "  | " + position[2];
+    let row_2 = position[3] + "  | " + position[4] + "  | " + position[5];
+    let row_3 = position[6] + "  | " + position[7] + "  | " + position[8];
 
     for (let i = 1; i < 2; i++) {
         
-    //    console.log(preRow1);
+        console.log(preRow1);
         console.log(row_1);
-    //    console.log(preRow1);
+        console.log(preRow1);
         console.log(vertical);
+        console.log(preRow1);
         console.log(row_2);
+        console.log(preRow1);
         console.log(vertical);
+        console.log(preRow1);
         console.log(row_3);
+        console.log(preRow1);
     }
     
 }
 
-
-    let boardPlaces = ["O", "X", "O", "X", "X", "O", "", "O", "X"];
+    let boardPlaces = ["O", "X", "O", "X", "X", "O", "X", "O", "X"];
     importBoard(boardPlaces);
     
    
@@ -176,7 +190,7 @@ function displayBoard() {
    // wins(player_2_moves);
     
     
-   isGameOver(); 
+    isGameOver(); 
     
     
    
