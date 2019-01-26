@@ -1,4 +1,3 @@
-
 let vertical = "---" + "+" + "---"  + "-" + "+" + "---";
 
 const position = ["", "", "", "", "", "", "", "", ""];
@@ -18,41 +17,43 @@ const winningPositions = [
 ];
 
 
-function wins(playerMoves) {
 
-    const finalResults = [];
-    
-    
-    
-    
-    /* for (let j = 0; j < winningPositions[i].length; j++) {
-            console.log(winningPositions[i][j]); 
-        }  */
-    
-    //console.log("FR " + finalResults);
- 
-    
-    
-    
-   /* 
+function isWin(boardMoves) {
+
     if (boardMoves[0] == boardMoves[1] && boardMoves[1] == boardMoves[2]) {
-        console.log("Winner!");
+        console.log(boardMoves[0] + boardMoves[1] + boardMoves[2]);
+        console.log("Game won");
+        return true;
     } else if (boardMoves[3] == boardMoves[4] && boardMoves[4] == boardMoves[5]) {
-        console.log("Winner!");
+        console.log(boardMoves[3] + boardMoves[4] + boardMoves[5]);
+        console.log("Game won");
+        return true;
     } else if (boardMoves[6] == boardMoves[7] && boardMoves[7] == boardMoves[8]) {
-        console.log("Winner!");
+        console.log(boardMoves[6] + boardMoves[7] + boardMoves[8]);
+        console.log("Game won");
+        return true;
     } else if (boardMoves[0] == boardMoves[4] && boardMoves[4] == boardMoves[8]) {
-        console.log("Winner!");
+        console.log(boardMoves[0] + boardMoves[4] + boardMoves[8]);
+        console.log("Game won");
+        return true;   
     } else if (boardMoves[2] == boardMoves[4] && boardMoves[4] == boardMoves[6]) {
-        console.log("Winner!");
+        console.log(boardMoves[2] + boardMoves[4] + boardMoves[6]);
+        console.log("Game won");
+        return true;
     } else if (boardMoves[0] == boardMoves[3] && boardMoves[3] == boardMoves[6]) {
-        console.log("Winner!");
+        console.log(boardMoves[0] + boardMoves[3] + boardMoves[6]);
+        console.log("Game won");
+        return true;
     } else if (boardMoves[1] == boardMoves[4] && boardMoves[4] == boardMoves[7]) {
-        console.log("Winner!");
+        console.log(boardMoves[1] + boardMoves[4] + boardMoves[7]);
+        console.log("Game won");
+        return true;
     } else if (boardMoves[2] == boardMoves[5] && boardMoves[5] == boardMoves[8]) {
-        console.log("Winner!");
+        console.log(boardMoves[2] + boardMoves[5] + boardMoves[8]);
+        console.log("Game won");
+        return true;
     } else
-        console.log("OK");*/
+        console.log("Draw");
     
 }
 
@@ -140,7 +141,7 @@ function importBoard(string) {
        // Keep track of the player's move
        // Store them in an array
        if (string[i] == "X" || string[i] == "x") {
-           player_1_moves.push(i);
+            player_1_moves.push(i);
        } else if (string[i] == "O" || string[i] == "o") {
            player_2_moves.push(i);
        }
@@ -178,7 +179,8 @@ function displayBoard() {
     
 }
 
-    let boardPlaces = ["O", "X", "O", "X", "X", "O", "X", "O", "X"];
+
+    let boardPlaces = ["O", "X", " ", "O", "X", "O", " ", "O", "X"];
     importBoard(boardPlaces);
     
    
@@ -186,11 +188,11 @@ function displayBoard() {
 
     displayBoard();
     
-    wins(player_1_moves);
+    isWin(boardPlaces);
    // wins(player_2_moves);
     
+   // console.log(testArr);
     
     isGameOver(); 
     
     
-   
