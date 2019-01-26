@@ -18,39 +18,42 @@ const winningPositions = [
 
 
 
-function isWin(boardMoves) {
+function didWin(boardMoves) {
+    
+    let player_that_won;
+    
 
     if (boardMoves[0] == boardMoves[1] && boardMoves[1] == boardMoves[2]) {
         console.log(boardMoves[0] + boardMoves[1] + boardMoves[2]);
-        console.log("Game won");
+        player_that_won = (boardMoves[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else if (boardMoves[3] == boardMoves[4] && boardMoves[4] == boardMoves[5]) {
         console.log(boardMoves[3] + boardMoves[4] + boardMoves[5]);
-        console.log("Game won");
+        player_that_won = (boardMoves[3] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else if (boardMoves[6] == boardMoves[7] && boardMoves[7] == boardMoves[8]) {
         console.log(boardMoves[6] + boardMoves[7] + boardMoves[8]);
-        console.log("Game won");
+        player_that_won = (boardMoves[6] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else if (boardMoves[0] == boardMoves[4] && boardMoves[4] == boardMoves[8]) {
         console.log(boardMoves[0] + boardMoves[4] + boardMoves[8]);
-        console.log("Game won");
+        player_that_won = (boardMoves[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;   
     } else if (boardMoves[2] == boardMoves[4] && boardMoves[4] == boardMoves[6]) {
         console.log(boardMoves[2] + boardMoves[4] + boardMoves[6]);
-        console.log("Game won");
+        player_that_won = (boardMoves[2] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else if (boardMoves[0] == boardMoves[3] && boardMoves[3] == boardMoves[6]) {
         console.log(boardMoves[0] + boardMoves[3] + boardMoves[6]);
-        console.log("Game won");
+        player_that_won = (boardMoves[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else if (boardMoves[1] == boardMoves[4] && boardMoves[4] == boardMoves[7]) {
         console.log(boardMoves[1] + boardMoves[4] + boardMoves[7]);
-        console.log("Game won");
+        player_that_won = (boardMoves[1] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else if (boardMoves[2] == boardMoves[5] && boardMoves[5] == boardMoves[8]) {
         console.log(boardMoves[2] + boardMoves[5] + boardMoves[8]);
-        console.log("Game won");
+        player_that_won = (boardMoves[2] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else
         console.log("Draw");
@@ -107,7 +110,7 @@ function isValidMove(move) {
 
 function isGameOver() {
     
-    if ((player_1_moves.length + player_2_moves.length) >= 9) {
+    if ((player_1_moves.length + player_2_moves.length) > 8) {
         console.log("Game is over");
         return false;   
     } else {
@@ -180,7 +183,7 @@ function displayBoard() {
 }
 
 
-    let boardPlaces = ["O", "X", " ", "O", "X", "O", " ", "O", "X"];
+    let boardPlaces = ["O", "X", "X", "O", "X", "O", "X", " ", "X"];
     importBoard(boardPlaces);
     
    
@@ -188,7 +191,7 @@ function displayBoard() {
 
     displayBoard();
     
-    isWin(boardPlaces);
+    didWin(boardPlaces);
    // wins(player_2_moves);
     
    // console.log(testArr);
