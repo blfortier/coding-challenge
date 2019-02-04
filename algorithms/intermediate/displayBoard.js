@@ -1,12 +1,14 @@
 
 let vertical = "\t" + "---" + "+" + "---"  + "-" + "+" + "---";
 
-const position = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+const position = ["", "", "", "", "", "", "", "", ""];
+
+
+//let moveCount = (player_1_moves.length + player_2_moves.length);
 
 let player_1_moves = [];
 let player_2_moves = [];
 
-let moveCount = 0;
 
 const winningPositions = [
 	[0,1,2],
@@ -21,37 +23,37 @@ const winningPositions = [
 
 
 
-function didWin(boardMoves) {
+function didWin() {
     
     let player_that_won;
     
 
-    if (boardMoves[0] == boardMoves[1] && boardMoves[1] == boardMoves[2] && boardMoves[0] != " ") {
-        player_that_won = (boardMoves[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    if (position[0] == position[1] && position[1] == position[2] && position[0] != "") {
+        player_that_won = (position[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
-    } else if (boardMoves[3] == boardMoves[4] && boardMoves[4] == boardMoves[5] && boardMoves[3] != " ") {
-        player_that_won = (boardMoves[3] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    } else if (position[3] == position[4] && position[4] == position[5] && position[3] != "") {
+        player_that_won = (position[3] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
-    } else if (boardMoves[6] == boardMoves[7] && boardMoves[7] == boardMoves[8] && boardMoves[6] != " ") {
-        player_that_won = (boardMoves[6] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    } else if (position[6] == position[7] && position[7] == position[8] && position[6] != "") {
+        player_that_won = (position[6] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
-    } else if (boardMoves[0] == boardMoves[4] && boardMoves[4] == boardMoves[8] && boardMoves[0] != " ") {
-        player_that_won = (boardMoves[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    } else if (position[0] == position[4] && position[4] == position[8] && position[0] != "") {
+        player_that_won = (position[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;   
-    } else if (boardMoves[2] == boardMoves[4] && boardMoves[4] == boardMoves[6] && boardMoves[2] != " ") {
-        player_that_won = (boardMoves[2] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    } else if (position[2] == position[4] && position[4] == position[6] && position[2] != "") {
+        player_that_won = (position[2] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
-    } else if (boardMoves[0] == boardMoves[3] && boardMoves[3] == boardMoves[6] && boardMoves[0] != " ") {
-        player_that_won = (boardMoves[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    } else if (position[0] == position[3] && position[3] == position[6] && position[0] != "") {
+        player_that_won = (position[0] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
-    } else if (boardMoves[1] == boardMoves[4] && boardMoves[4] == boardMoves[7] && boardMoves[1] != " ") {
-        player_that_won = (boardMoves[1] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    } else if (position[1] == position[4] && position[4] == position[7] && position[1] != "") {
+        player_that_won = (position[1] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
-    } else if (boardMoves[2] == boardMoves[5] && boardMoves[5] == boardMoves && boardMoves[2] != " ") {
-        player_that_won = (boardMoves[2] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
+    } else if (position[2] == position[5] && position[5] == position && position[2] != "") {
+        player_that_won = (position[2] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else {
-        // /console.log("No winner");
+        console.log("Nobody won...");
         return false;
     }
 }
@@ -67,53 +69,67 @@ function isValidMove(move) {
     // If the passed in number is beween 0 and 8 (the tic tac toe board),
     // and the spot is empty, return true. If the spot is taken, return false
     if (move >= 0 && move <= 8) {
-        result = (position[move] == " ") ? true : false;
+        if (!position[move]) {
+            console.log("That spots open");
+            return true;
+        } else {
+            console.log("That spots taken");
+            return false;
+        }
     } else {
         console.log("Please enter a number between 0 and 8");
         result = false;
     }
   
-    //console.log(result);
-   
-    // Return the result, true or falsess
+    // Return the result, true or false
     return result;
 }
 
 
-function isGameOver() {
+function isDraw() {
     
-    if ((player_1_moves.length + player_2_moves.length) > 8) {
-        console.log("Game is over");
-        return false;   
+    if ((player_1_moves.length + player_2_moves.length) > 9) {
+        console.log("Game is over, nobody won...");
+        return true;   
     } else {
-       // console.log("There's some moves left!");
-        return true;
+        console.log(player_1_moves.length + player_2_moves.length);
+        return false;
     }
 }
 
-
 function applyMove(move, player) {
+
+    position[move] = fillPlayerArrays(move, player);
+}
+
+
+function processMove(move, player) {
     
-    let token = (player == 1) ? "X" : "O";
-    
-    if (isValidMove(move) == false) {
+    if (!isValidMove(move)) {
         console.log("Nope");
         return false;
     } else {
-        position[move] = token;
-        
-        if (token == "X") {
-            player_1_moves.push(move);
-        } else {
-            player_2_moves.push(move);
+        applyMove(move, player);
+
+        if (isDraw() && didWin()){
+            console.log("TODO");
+            return true;
         }
     }
-    
-    if (isGameOver() &&  didWin(position)){
-        console.log("False");
-        return true;
-    }
 }
+
+function fillPlayerArrays(move, player) {
+    
+    let token = (player == 1) ? "X" : "O";
+        
+    if (token == "X") 
+        player_1_moves.push(move);
+    else 
+        player_2_moves.push(move);
+        
+    return token;
+}
+
 
 // This function takes a string of X's, O's, or ""
 // it stores the tokens in the appropriate place
@@ -123,7 +139,8 @@ function importBoard(string) {
     // Store the values of the passed array
     // into the positions array
     for(let i = 0; i < position.length; i++) {
-       position[i] = string[i];
+       position[i] = string[i];;
+     
        
        // Keep track of the player's move
        // Store them in an array
@@ -133,16 +150,11 @@ function importBoard(string) {
            player_2_moves.push(i);
        }
     }
-    
-    console.log("String of pos: " + "[" + position + "]");
-    console.log("Player 1 moves: " + "[" + player_1_moves + "]");
-    console.log("Player 2 moves: " + "[" + player_2_moves + "]");
-    
 }
 
 function resetBoard() {
     for (let i = 0; i < position; i++) {
-        position[i] = " ";
+        position[i] = "";
     }
 }
 
@@ -151,8 +163,8 @@ function displayBoard() {
     
     // Display the tic tac toe board
     let preRow1 = "\t   |    |  ";
-    let row_1 = "\t" + position[0] + "  | " + position[1] + "  | " + position[2];
-    let row_2 = "\t" +position[3] + "  | " + position[4] + "  | " + position[5];
+    let row_1 = "\t" + position[0] + "   | " + position[1] + "   | " + position[2];
+    let row_2 = "\t" +position[3] + "  | " + position[4] + "   | " + position[5];
     let row_3 = "\t" +position[6] + "  | " + position[7] + "  | " + position[8];
 
     for (let i = 1; i < 2; i++) {
@@ -175,9 +187,13 @@ function displayBoard() {
 }
 
 
-   // let boardPlaces = ["O", "X", "X", "O", "X", "O", "X", " ", "X"];
-   // importBoard(boardPlaces);
+    let boardPlaces = ["", "", "X", "X", "", "", "O", "", "O"];
+    importBoard(boardPlaces);
     
+   
+    processMove(7, 1);
+   
+   
    
     //let move = isValidMove(2);
 
@@ -186,40 +202,18 @@ function displayBoard() {
    // didWin(boardPlaces);
 
    // isGameOver(); 
-   
-    applyMove(4, 1);
-    displayBoard();
-    applyMove(0, 2);
-    displayBoard();
-    applyMove(5, 1);
-    displayBoard();
-    applyMove(8, 2);
-    displayBoard();
-    applyMove(2, 1);
-    displayBoard();
-   applyMove(3, 2);
-    displayBoard();
-    applyMove(1, 1);
-    displayBoard();
-   applyMove(7, 2);
-    displayBoard();
-    applyMove(6, 1);
-    displayBoard();
-
   
-   didWin(position);
+  // didWin(position);
    
    
-   console.log("pos: " + position);
-   console.log("player 1: [" + player_1_moves + "]");
-   console.log("player 2: [" + player_2_moves + "]");
+   console.log("pos: ", position);
+   console.log("player 1: ", player_1_moves);
+   console.log("player 2: ", player_2_moves);
+   console.log("Did somebody win? ", didWin());
+   console.log("Is there a draw? ", isDraw());
+   console.log();
    
    displayBoard();
-
-
-
-
-
 
 
 
