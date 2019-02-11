@@ -50,10 +50,9 @@ function isValidMove(move) {
     // and the spot is empty, return true. If the spot is taken, return false
     if (move >= 0 && move <= 8) {
         if (position[move] == "") {
-            console.log("That spots open");
             return true;
         } else {
-            console.log("That spots taken");
+            console.log("That spots taken, try again.");
             return false;
         }
     } else {
@@ -68,14 +67,12 @@ function applyMove(move, player) {
     let token = (player == 1) ? "X" : "O";
     
     position[move] = token;
-    //boardPlaces[move] = fillPlayerArrays(move, player);
 }
 
 
 function processMove(move, player) {
     
     if (!isValidMove(move)) {
-        console.log("Nope");
         return false;
     } else {
         applyMove(move, player);
@@ -85,11 +82,7 @@ function processMove(move, player) {
         else
             player_2_moves.push(move);
             
-    
-        if (isDraw() && didWin()){
-            isGameOver();
-            return true;
-        }
+       isGameOver();
     }
 }
 
@@ -123,7 +116,6 @@ function didWin() {
         player_that_won = (position[2] == "X") ? console.log("Player 1 won!") : console.log("Player 2 won!");
         return true;
     } else {
-        //console.log("Nobody won...");
         return false;
     }
 }
@@ -131,29 +123,39 @@ function didWin() {
 
 function isDraw() {
     
-    if ((player_1_moves.length + player_2_moves.length) > 8) {
-        console.log("Looks like the board is full, nobody won...");
-        console.log("Game Over!");
-        resetBoard();
+    if ((player_1_moves.length + player_2_moves.length) > 8) 
         return true;   
-    } else {
-        console.log(player_1_moves.length + player_2_moves.length);
+    else 
         return false;
-    }
 }
 
 
 function isGameOver() {
     
-    if (isDraw || didWin) 
-        resetBoard();
-}
+   if (isDraw()) {
+       console.log("Looks like the board is full, nobody won...");
+       console.log("Game Over!");
+       resetBoard();
+       displayBoard();
+   } else if (didWin()) {
+       console.log("Looks like we've got a winner!!");
+       resetBoard();
+       displayBoard();
+   }
+   
+}     
 
 
 function resetBoard() {
-    for (let i = 0; i < position; i++) {
-        position[i] = "";
-    }
+    
+    let position = ["", "", "", "", "", "", "", "", ""];
+   
+    player_1_moves = [];
+    player_2_moves = [];
+    
+    
+    
+    console.log("Resetting board...");
 }
 
 
@@ -184,30 +186,65 @@ function displayBoard() {
     
 }
 
+
+function test_player1_win() {
+  
+    processMove(2, 1);
+    processMove(5, 2);
+    processMove(1, 1);
+    processMove(8, 2);
+    processMove(0, 1);
+}
+
+function test_player2_win() {
     
-   // let boardPlaces = ["", "", "X", "X", "", "", "O", "X", "O"];
-   //importBoard(boardPlaces);
+    processMove(2, 1);
+    processMove(0, 2);
+    processMove(5, 1);
+    processMove(3, 2);
+    processMove(7, 1);
+    processMove(6, 2);
+}
+
+function test_draw() {
     
-     processMove(5, 1);
-     processMove(3, 1);
-     processMove(1, 2);
-     processMove(0, 1);
-     processMove(2, 1);
-     processMove(8, 2);
-     processMove(7, 1);
-     processMove(4, 2);
-     processMove(6,2);
-     
- 
-    console.log();
-    
-    displayBoard();
+    processMove(1, 1);
+    processMove(0, 2);
+    processMove(4, 1);
+    processMove(2, 2);
+    processMove(8, 1);
+    processMove(3, 2);
+    processMove(6, 1);
+    processMove(7, 2);
+    processMove(5, 1);
+
+}
+
+
+
+function main() {
    
+   
+   
+    //test_player1_win();
+    //test_player2_win();
+    test_draw();
+      
+    displayBoard();
+    resetBoard();
     console.log("pos: ", position);
     console.log("player 1: ", player_1_moves);
     console.log("player 2: ", player_2_moves);
-    
     console.log("Did somebody win? ", didWin());
     console.log("Is there a draw? ", isDraw());
-   
+ 
     
+        
+ }
+ 
+ 
+ 
+    main();
+   
+ 
+  
