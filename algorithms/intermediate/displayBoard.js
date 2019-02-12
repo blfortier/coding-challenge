@@ -148,7 +148,8 @@ function isGameOver() {
 
 function resetBoard() {
     
-    let position = ["", "", "", "", "", "", "", "", ""];
+    for(let i = 0; i < position.length; i++)
+        position[i] = "";
    
     player_1_moves = [];
     player_2_moves = [];
@@ -231,7 +232,7 @@ function main() {
     test_draw();
       
     displayBoard();
-    resetBoard();
+   
     console.log("pos: ", position);
     console.log("player 1: ", player_1_moves);
     console.log("player 2: ", player_2_moves);
