@@ -86,6 +86,7 @@ function processMove(move, player) {
     }
 }
 
+
 function didWin() {
     
     let player_that_won;
@@ -136,11 +137,9 @@ function isGameOver() {
        console.log("Looks like the board is full, nobody won...");
        console.log("Game Over!");
        resetBoard();
-       displayBoard();
    } else if (didWin()) {
        console.log("Looks like we've got a winner!!");
        resetBoard();
-       displayBoard();
    }
    
 }     
@@ -154,8 +153,6 @@ function resetBoard() {
     player_1_moves = [];
     player_2_moves = [];
     
-    
-    
     console.log("Resetting board...");
 }
 
@@ -165,7 +162,7 @@ function displayBoard() {
     // Display the tic tac toe board
     let preRow1 = "\t   |    |  ";
     let row_1 = "\t" + position[0] + "  | " + position[1] + "  | " + position[2];
-    let row_2 = "\t" +position[3] + "  | " + position[4] + "  | " + position[5];
+    let row_2 = "\t" +position[3] + "  | " + position[4] + "    | " + position[5];
     let row_3 = "\t" +position[6] + "  | " + position[7] + "  | " + position[8];
 
     for (let i = 1; i < 2; i++) {
@@ -221,6 +218,28 @@ function test_draw() {
 
 }
 
+function diagnalWin() {
+    
+    processMove(0, 1);
+    processMove(4, 1);
+    processMove(8, 1);
+
+}
+
+function colWin() {
+    
+    processMove(0, 2);
+    processMove(3, 2);
+    processMove(6, 2);
+}
+
+function rowWin() {
+    
+    processMove(6, 1);
+    processMove(7, 1);
+    processMove(8, 1);
+}
+
 
 
 function main() {
@@ -229,8 +248,11 @@ function main() {
    
     //test_player1_win();
     //test_player2_win();
-    test_draw();
-      
+    //test_draw();
+    
+    //diagnalWin();
+    rowWin();
+    //colWin();
     displayBoard();
    
     console.log("pos: ", position);
