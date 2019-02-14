@@ -6,6 +6,8 @@ let position = ["", "", "", "", "", "", "", "", ""];
 let player_1_moves = [];
 let player_2_moves = [];
 
+let moveCount = 0;
+
 
 const winningPositions = [
 	[0,1,2],
@@ -18,6 +20,10 @@ const winningPositions = [
 	[2,5,8]
 ];
 
+    
+var readline = require('readline-sync');
+
+var fs = require('fs');
 
 // This function takes a string of X's, O's, or ""
 // it stores the tokens in the appropriate place
@@ -240,34 +246,78 @@ function rowWin() {
     processMove(8, 1);
 }
 
+function userInterface() {
+    
+    
+    console.log("\tWelcome to Tic Tac Toe!");
+    console.log("\t~~~~~~~~~~~~~~~~~~~~~~~");
+    console.log("To take your turn, enter a number between 1 and 9.\nThis number will correspond with a place on the board.");
+    console.log("Enter 'q' to quit at any time.");
+    console.log("Player 1, you are 'X'. Player 2, you are 'O'.");
+    console.log("Naturally, player 1 you are first.");
+    
+    do {
+        
+        var move = readline.question("Move: ");
+        
+       if(move < 1 || move > 8)
+            console.log("Invalid move..");
+       else
+           moveCount++;
+        
+       
+    } while(move != "q" && move != "Q");
+    moveCount--;
+    console.log("You've exited the game...");
+}
 
 
-function main() {
-   
-   
+async function main() {
    
     //test_player1_win();
     //test_player2_win();
     //test_draw();
-    
     //diagnalWin();
-    rowWin();
+    //rowWin();
     //colWin();
-    displayBoard();
+   // displayBoard();
    
-    console.log("pos: ", position);
+   /* console.log("pos: ", position);
     console.log("player 1: ", player_1_moves);
     console.log("player 2: ", player_2_moves);
     console.log("Did somebody win? ", didWin());
-    console.log("Is there a draw? ", isDraw());
- 
+    console.log("Is there a draw? ", isDraw());*/
     
-        
+    userInterface();
+    
+    
+    console.log(moveCount);
  }
  
  
  
     main();
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ // continue - restart loop
+ // break -- end loop
+ 
+ // first function - ask user for input repeatedly, validate input
+ // give user input option to break out of the game
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
    
  
   
