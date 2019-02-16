@@ -1,5 +1,5 @@
 
-let vertical = "\t" + "---" + "+" + "---"  + "-" + "+" + "---";
+let vertical = "      -----+-----+-----";
 
 let position = ["", "", "", "", "", "", "", "", ""];
 
@@ -22,8 +22,6 @@ const winningPositions = [
 
     
 var readline = require('readline-sync');
-
-var fs = require('fs');
 
 // This function takes a string of X's, O's, or ""
 // it stores the tokens in the appropriate place
@@ -54,7 +52,7 @@ function isValidMove(move) {
     
     // If the passed in number is beween 0 and 8 (the tic tac toe board),
     // and the spot is empty, return true. If the spot is taken, return false
-    if (move >= 0 && move <= 8) {
+    if (move >= 0 && move <= 8 && move != -1) {
         if (position[move] == "") {
             return true;
         } else {
@@ -68,22 +66,23 @@ function isValidMove(move) {
 }
 
 
-function applyMove(move, player) {
+function applyMove(move) {
 
-    let token = (player == 1) ? "X" : "O";
+    let token = (moveCount % 2 == 0) ? "X" : "O";
     
     position[move] = token;
 }
 
 
-function processMove(move, player) {
+function processMove(move) {
     
     if (!isValidMove(move)) {
         return false;
     } else {
-        applyMove(move, player);
+        applyMove(move);
+        moveCount++;
 
-        if (player == 1)
+        if (moveCount % 2 != 0)
             player_1_moves.push(move);
         else
             player_2_moves.push(move);
@@ -163,34 +162,6 @@ function resetBoard() {
 }
 
 
-function displayBoard() {
-    
-    // Display the tic tac toe board
-    let preRow1 = "\t   |    |  ";
-    let row_1 = "\t" + position[0] + "  | " + position[1] + "  | " + position[2];
-    let row_2 = "\t" +position[3] + "  | " + position[4] + "    | " + position[5];
-    let row_3 = "\t" +position[6] + "  | " + position[7] + "  | " + position[8];
-
-    for (let i = 1; i < 2; i++) {
-        
-        console.log(preRow1);
-        console.log(row_1);
-        console.log(preRow1);
-        console.log(vertical);
-        console.log(preRow1);
-        console.log(row_2);
-        console.log(preRow1);
-        console.log(vertical);
-        console.log(preRow1);
-        console.log(row_3);
-        console.log(preRow1);
-    }
-    
-    console.log("****************************");
-    
-}
-
-
 function test_player1_win() {
   
     processMove(2, 1);
@@ -254,44 +225,94 @@ function userInterface() {
     console.log("To take your turn, enter a number between 1 and 9.\nThis number will correspond with a place on the board.");
     console.log("Enter 'q' to quit at any time.");
     console.log("Player 1, you are 'X'. Player 2, you are 'O'.");
-    console.log("Naturally, player 1 you are first.");
+    console.log("Naturally, player 1 you are first.\n");
     
-    do {
+    while (true) {
+           
+        var message = (moveCount % 2 == 0) ? "Player 1 move: " : "Player 2 move: ";
+        var input= readline.question(message);
         
-        var move = readline.question("Move: ");
+      
+        if (input == 'q' || input == 'h')
+           break;
+        else
+            var move = parseInt(input);
         
-       if(move < 1 || move > 8)
-            console.log("Invalid move..");
-       else
-           moveCount++;
+      //  moveCount++;
+        processMove(move); 
+        displayBoard();
+       
+        console.log("player 1: ", player_1_moves);
+        console.log("player 2: ", player_2_moves);
+        console.log("MC: " + moveCount);
+          
+        if (isGameOver())
+            break;
+        
         
        
-    } while(move != "q" && move != "Q");
+    } 
     moveCount--;
     console.log("You've exited the game...");
 }
 
+function displayBoard() {
+    
+    // Display the tic tac toe board
+    let preRow1 = "\t   |     |  ";
+    let row_1 = "\t" + "  " + position[0]  + "  " + "|"  + "  " +  position[1] + "  " + "|" + "  " + position[2];
+    let row_2 = "\t"  + position[3]  + "  |  "  +  position[4] + "  | " + " " + position[5];
+    let row_3 = "\t"  + position[6]  + "  |  "  +  position[7] + "  | " + " " + position[8];
+
+    for (let i = 1; i < 2; i++) {
+        
+        console.log(preRow1);
+        console.log(row_1);
+        console.log(preRow1);
+        console.log(vertical);
+        console.log(preRow1);
+        console.log(row_2);
+        console.log(preRow1);
+        console.log(vertical);
+        console.log(preRow1);
+        console.log(row_3);
+        console.log(preRow1);
+    }
+    
+    console.log("****************************");
+    
+}
+
+
 
 async function main() {
-   
+    
+   // var board = ['O', 'X', 'X', 'O', 'O', 'X', 'O', 'X', 'O'];
+  //  importBoard(board);
+    
     //test_player1_win();
     //test_player2_win();
     //test_draw();
     //diagnalWin();
     //rowWin();
     //colWin();
-   // displayBoard();
+    //displayBoard();
    
    /* console.log("pos: ", position);
     console.log("player 1: ", player_1_moves);
-    console.log("player 2: ", player_2_moves);
+    console.log("player 2: ", player_2_moves);4
+    
     console.log("Did somebody win? ", didWin());
     console.log("Is there a draw? ", isDraw());*/
     
     userInterface();
+
     
     
+    console.log();
     console.log(moveCount);
+    console.log("player 1: ", player_1_moves);
+    console.log("player 2: ", player_2_moves);
  }
  
  
